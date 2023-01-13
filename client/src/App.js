@@ -12,7 +12,7 @@ function App() {
             <Form />
           </div>
 
-          <div className='col-12 ' style={{backgroundColor:"#ebede8"}}>
+          <div className='col-12 '>
             <Table />
           </div>
 
