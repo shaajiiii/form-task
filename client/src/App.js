@@ -4,7 +4,17 @@ function App() {
   return (
     <div className="App">
       <h1>Test header inside app</h1>
-      <Form />
+      <div className='container'>
+        <div className='row'>
+
+          <div className='col-12'>
+            <Form />
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }
