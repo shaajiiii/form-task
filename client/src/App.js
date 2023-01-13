@@ -3,11 +3,11 @@ import Form from './components/Form';
 function App() {
   return (
     <div className="App">
-      <h1>Test header inside app</h1>
+      
       <div className='container'>
-        <div className='row'>
+        <div className='row d-flex justify-content-center'>
 
-          <div className='col-12'>
+          <div className='col-12 col-md-6 '>
             <Form />
           </div>
 

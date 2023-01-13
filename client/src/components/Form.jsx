@@ -1,22 +1,57 @@
 import React from 'react';
-import  styles from './Form.module.css';
+import styles from './Form.module.css';
 
 function Form() {
   return (
-    <div  className={`${styles.form_container} p-3` } >
+    <div className={`${styles.form_container} p-4 mt-4`} >
       <h1>Form</h1>
-      <form className=''>
-        <div class="mb-3">
+      <form className='row'>
+        <div class="col-6 mb-2">
+          <label for="validationCustom01" class="form-label">First name</label>
+          <input type="text" class="form-control" value="Test name" required />
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-6 ">
+          <label for="validationCustom02" class="form-label">Last name</label>
+          <input type="text" class="form-control" value="test lname" required />
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="mb-2">
           <label for="exampleInputEmail1" class="form-label">Email address</label>
           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          {/* <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> */}
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" />
+
+        <div class="col-4">
+          <label class="form-label">Mobile</label>
+          <input type="number" class="form-control" required />
         </div>
-       
-        <button type="submit" class="btn btn-primary">Submit</button>
+
+        <div class="col-4">
+          <label class="form-label">Age</label>
+          <input type="number" class="form-control" required />
+        </div>
+
+        <div class="col-4 mb-4">
+          <label class="form-label">DOB</label>
+          <input type="date" class="form-control" required />
+        </div>
+
+
+        <div>
+          <button className='btn btn-primary col-12'> Submit </button>
+        </div>
+
+
+
+
+
+
+
       </form>
     </div>
   )
