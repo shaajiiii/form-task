@@ -10,8 +10,15 @@ function Form() {
   const [age, setAge] = useState('');
   const [dob, setDob] = useState('');
 
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [mobileError, setMobileError] = useState('');
+  const [ageError, setAgeError] = useState('');
+  const [dobError, setDobError] = useState('');
 
-  let handleSubmit = (e)=>{
+
+  let handleSubmit = (e) => {
     e.preventDefault();
     let formData = {
       firstName: firstName,
@@ -35,9 +42,9 @@ function Form() {
             value={firstName}
             onChange={(e) => { setFirstName(e.target.value) }}
             required />
-          <div class="valid-feedback">
-            Looks good!
-          </div>
+
+          {firstNameError && <span className={`${styles.error_message}`} >{firstNameError}</span>}
+
         </div>
 
         <div class="col-12 col-md-6 ">
@@ -46,9 +53,8 @@ function Form() {
             value={lastName}
             onChange={(e) => { setLastName(e.target.value) }}
             required />
-          <div class="valid-feedback">
-            Looks good!
-          </div>
+
+          {lastNameError && <span className={`${styles.error_message}`} >{lastNameError}</span>}
         </div>
 
         <div class="mb-2">
@@ -57,7 +63,8 @@ function Form() {
             value={email}
             onChange={(e) => { setEmail(e.target.value) }}
             aria-describedby="emailHelp" />
-          {/* <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> */}
+
+          {emailError && <span className={`${styles.error_message}`} >{emailError}</span>}
         </div>
 
         <div class="col-md-4">
@@ -66,6 +73,7 @@ function Form() {
             value={mobile}
             onChange={(e) => { setMobile(e.target.value) }}
             required />
+          {mobileError && <span className={`${styles.error_message}`} >{mobileError}</span>}
         </div>
 
         <div class="col-6 col-md-4">
@@ -74,6 +82,7 @@ function Form() {
             value={age}
             onChange={(e) => { setAge(e.target.value) }}
             required />
+          {ageError && <span className={`${styles.error_message}`} >{ageError}</span>}
         </div>
 
         <div class="col-6 col-md-4 mb-4">
@@ -82,6 +91,7 @@ function Form() {
             value={dob}
             onChange={(e) => { setDob(e.target.value) }}
             required />
+          {dobError && <span className={`${styles.error_message}`} >{dobError}</span>}
         </div>
 
 

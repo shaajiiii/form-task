@@ -7,4 +7,8 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-  
+
+.error_message{
+    color: #eb4034;
+    
+}
