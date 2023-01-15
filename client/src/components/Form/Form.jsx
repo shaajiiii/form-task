@@ -15,20 +15,51 @@ function Form() {
   const [emailError, setEmailError] = useState('');
   const [mobileError, setMobileError] = useState('');
   const [ageError, setAgeError] = useState('');
-  const [dobError, setDobError] = useState('');
+  // const [dobError, setDobError] = useState('');
 
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    let formData = {
-      firstName: firstName,
-      lastName: lastName,
-      mobile: mobile,
-      age: age,
-      email: email,
-      dob: dob
+    let validationErr = false;
+
+    // validations
+
+    if (!/^[A-Za-z]+$/.test(firstName)) {
+      validationErr = true;
+      setFirstNameError("Only letters allowed")
     }
-    console.log(formData);
+    if (!/^[A-Za-z]+$/.test(lastName)) {
+      validationErr = true;
+      setLastNameError('Only letters allowed in last name')
+    }
+    if (!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email)) {
+      validationErr = true;
+      setEmailError('Invalid Email')
+    }
+    if (!/^[0-9]{10}$/.test(mobile)) {
+      validationErr = true;
+      setMobileError('Please give your 10 digit number');
+    }
+    if (age < 1 || age > 150) {
+      validationErr = true;
+      setAgeError('Insert a valid age...')
+    }
+    ////// validations end
+
+    // this will fire if the data is valid
+    if (!validationErr) {
+      console.log("request sent!!!!!!")
+    }
+
+    // let formData = {
+    //   firstName: firstName,
+    //   lastName: lastName,
+    //   mobile: mobile,
+    //   age: age,
+    //   email: email,
+    //   dob: dob
+    // }
+    // console.log(formData);
   }
 
   return (
@@ -40,7 +71,7 @@ function Form() {
           <label for="validationCustom01" class="form-label">First name</label>
           <input type="text" class="form-control"
             value={firstName}
-            onChange={(e) => { setFirstName(e.target.value) }}
+            onChange={(e) => { setFirstName(e.target.value); setFirstNameError('') }}
             required />
 
           {firstNameError && <span className={`${styles.error_message}`} >{firstNameError}</span>}
@@ -51,7 +82,7 @@ function Form() {
           <label for="validationCustom02" class="form-label">Last name</label>
           <input type="text" class="form-control"
             value={lastName}
-            onChange={(e) => { setLastName(e.target.value) }}
+            onChange={(e) => { setLastName(e.target.value); setLastNameError('') }}
             required />
 
           {lastNameError && <span className={`${styles.error_message}`} >{lastNameError}</span>}
@@ -61,7 +92,7 @@ function Form() {
           <label for="exampleInputEmail1" class="form-label">Email address</label>
           <input type="email" class="form-control"
             value={email}
-            onChange={(e) => { setEmail(e.target.value) }}
+            onChange={(e) => { setEmail(e.target.value); setEmailError('') }}
             aria-describedby="emailHelp" />
 
           {emailError && <span className={`${styles.error_message}`} >{emailError}</span>}
@@ -71,7 +102,7 @@ function Form() {
           <label class="form-label">Mobile</label>
           <input type="number" class="form-control"
             value={mobile}
-            onChange={(e) => { setMobile(e.target.value) }}
+            onChange={(e) => { setMobile(e.target.value); setMobileError('') }}
             required />
           {mobileError && <span className={`${styles.error_message}`} >{mobileError}</span>}
         </div>
@@ -80,7 +111,7 @@ function Form() {
           <label class="form-label">Age</label>
           <input type="number" class="form-control"
             value={age}
-            onChange={(e) => { setAge(e.target.value) }}
+            onChange={(e) => { setAge(e.target.value); setAgeError('') }}
             required />
           {ageError && <span className={`${styles.error_message}`} >{ageError}</span>}
         </div>
@@ -91,7 +122,9 @@ function Form() {
             value={dob}
             onChange={(e) => { setDob(e.target.value) }}
             required />
-          {dobError && <span className={`${styles.error_message}`} >{dobError}</span>}
+
+          {/* {dobError && <span className={`${styles.error_message}`} >{dobError}</span>} */}
+
         </div>
 
 
