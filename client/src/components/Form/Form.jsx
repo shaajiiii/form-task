@@ -3,7 +3,7 @@ import styles from './Form.module.css';
 import axios from 'axios';
 import moment from 'moment';
 
-function Form({renderTable}) {
+function Form({ renderTable }) {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -62,7 +62,7 @@ function Form({renderTable}) {
       try {
         let resp = await axios.post("http://localhost:7000/user/add-user", formData);
         if (resp.status == 201) {
-          setFirstName('');setLastName('');setMobile('');setAge('');setEmail(''); setDob('');
+          setFirstName(''); setLastName(''); setMobile(''); setAge(''); setEmail(''); setDob('');
           renderTable();
         } else {
           console.log(resp);
@@ -73,26 +73,30 @@ function Form({renderTable}) {
 
       }
 
-   
+
     }
 
 
   }
 
+  //======= age & DOB functions
 
-
-
-  //======= age 
-
-  let findAge = (value)=>{
+  let findAge = (value) => {
     let dob = new Date(value)
     let age = new Date() - dob
     age = Math.floor(age / (1000 * 60 * 60 * 24 * 365.25));
-    (age<150 && age>1)? setAge(age):setAge("")
+    (age < 150 && age > 1) ? setAge(age) : setAge("")
   }
 
-
-
+  let findDOB = (age)=>{
+    if(age<150){
+      let now = new Date();
+      let currentYear = now.getFullYear();
+      let yearOfBirth = currentYear - age;
+      let Dob = `${yearOfBirth}-01-01`;
+      setDob(Dob);
+    }
+  }
 
 
 
@@ -146,7 +150,7 @@ function Form({renderTable}) {
           <label class="form-label">Age</label>
           <input type="number" class="form-control"
             value={age}
-            onChange={(e) => { setAge(e.target.value); setAgeError('') }}
+            onChange={(e) => { findDOB(e.target.value);setAge(e.target.value); setAgeError('') }}
             required />
           {ageError && <span className={`${styles.error_message}`} >{ageError}</span>}
         </div>
@@ -155,10 +159,10 @@ function Form({renderTable}) {
           <label class="form-label">DOB</label>
           <input type="date" class="form-control"
             value={dob}
-            onChange={(e) => {findAge(e.target.value); setDob(e.target.value) }}
-            required 
+            onChange={(e) => { findAge(e.target.value); setDob(e.target.value) }}
+            required
 
-            />
+          />
 
           {/* {dobError && <span className={`${styles.error_message}`} >{dobError}</span>} */}
 
