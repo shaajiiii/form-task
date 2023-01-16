@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Form.module.css';
+import axios from 'axios';
 
 function Form() {
 
@@ -18,7 +19,7 @@ function Form() {
   // const [dobError, setDobError] = useState('');
 
 
-  let handleSubmit = (e) => {
+  let handleSubmit = async (e) => {
     e.preventDefault();
     let validationErr = false;
 
@@ -48,19 +49,35 @@ function Form() {
 
     // this will fire if the data is valid
     if (!validationErr) {
+      let formData = {
+        firstName: firstName,
+        lastName: lastName,
+        mobile: mobile,
+        age: age,
+        email: email,
+        dob: dob
+      }
+
+      try {
+        let resp = await axios.post("http://localhost:7000/user/add-user", formData);
+        // if (resp.status == 201) {
+        //   setTitle('');
+        //   setMessage('');
+        //   getPostData();
+        // } else {
+        //   console.log(resp);
+        // }
+      }
+      catch (err) {
+        console.log(err);
+
+      }
+
+
       console.log("request sent!!!!!!")
     }
 
-    let formData = {
-      firstName: firstName,
-      lastName: lastName,
-      mobile: mobile,
-      age: age,
-      email: email,
-      dob: dob
-    }
-    console.log(formData);
-    console.log(typeof(dob));
+
   }
 
   return (

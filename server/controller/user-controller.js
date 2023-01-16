@@ -4,7 +4,8 @@ module.exports = {
 
 
     addUserData: async (req,res)=>{
-        console.log('req reached at add user data from postman');
+        console.log(' data reached from the form... - M');
+        console.log(req.body);
         // res.status(201).send({messsage:"created new post"})
 
     }
