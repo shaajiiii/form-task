@@ -16,6 +16,12 @@ module.exports = {
         let allUsers = await User.find();
         res.status(200).send(allUsers);
 
+    },
+    deleteUser: async (req,res)=>{
+
+        await User.deleteOne({_id:req.params.userId})  
+        res.status(200).send({message:"User deleted"})
+  
     }
  
 }

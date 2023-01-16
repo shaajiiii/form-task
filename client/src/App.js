@@ -36,7 +36,7 @@ function App() {
           </div>
 
           <div className='col-12 '>
-            <Table users={users}  />
+            <Table users={users} renderTable={getAllUsers} />
           </div>
 
         </div>
