@@ -51,15 +51,16 @@ function Form() {
       console.log("request sent!!!!!!")
     }
 
-    // let formData = {
-    //   firstName: firstName,
-    //   lastName: lastName,
-    //   mobile: mobile,
-    //   age: age,
-    //   email: email,
-    //   dob: dob
-    // }
-    // console.log(formData);
+    let formData = {
+      firstName: firstName,
+      lastName: lastName,
+      mobile: mobile,
+      age: age,
+      email: email,
+      dob: dob
+    }
+    console.log(formData);
+    console.log(typeof(dob));
   }
 
   return (
