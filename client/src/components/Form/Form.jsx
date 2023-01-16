@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './Form.module.css';
 import axios from 'axios';
 
-function Form() {
+function Form({renderTable}) {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -60,21 +60,19 @@ function Form() {
 
       try {
         let resp = await axios.post("http://localhost:7000/user/add-user", formData);
-        // if (resp.status == 201) {
-        //   setTitle('');
-        //   setMessage('');
-        //   getPostData();
-        // } else {
-        //   console.log(resp);
-        // }
+        if (resp.status == 201) {
+          setFirstName('');setLastName('');setMobile('');setAge('');setEmail(''); setDob('');
+          renderTable();
+        } else {
+          console.log(resp);
+        }
       }
       catch (err) {
         console.log(err);
 
       }
 
-
-      console.log("request sent!!!!!!")
+   
     }
 
 

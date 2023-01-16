@@ -1,7 +1,8 @@
 import React from 'react';
 
 
-function Table() {
+function Table({users}) {
+    
     return (
         <div style={{overflowX:"auto",backgroundColor:"#ebede8"}}>
             <table class="table">
@@ -17,18 +18,24 @@ function Table() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>928547629567</td>
-                        <td>msahgk @gami.com</td>
-                        <td>56</td>
-                        <td>12 - 4 - 1997</td>
-                        <td >
-                            <img style={{marginRight:"10px"}} src="icon-pencil.png" height={"25px"} alt="" />
-                            <img src="icon-delete.png" height={"25px"} alt="" />
-                        </td>
-                    </tr>
+
+                    {users.map((user)=>{
+                        return (  
+                            <tr>
+                            <td>{user.firstName}</td>
+                            <td>{user.lastName}</td>
+                            <td>{user.mobile}</td>
+                            <td>{user.email}</td>
+                            <td>{user.age}</td>
+                            <td>{user.dob}</td>
+                            <td >
+                                <img style={{marginRight:"10px"}} src="icon-pencil.png" height={"25px"} alt="" />
+                                <img src="icon-delete.png" height={"25px"} alt="" />
+                            </td>
+                        </tr>
+                        )
+                    })}
+                   
                 
                 </tbody>
             </table>
