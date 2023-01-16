@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Form.module.css';
 import axios from 'axios';
+import moment from 'moment';
 
 function Form({renderTable}) {
 
@@ -78,6 +79,24 @@ function Form({renderTable}) {
 
   }
 
+
+
+
+  //======= age 
+
+  let findAge = (value)=>{
+    let dob = new Date(value)
+    let age = new Date() - dob
+    age = Math.floor(age / (1000 * 60 * 60 * 24 * 365.25));
+    (age<150 && age>1)? setAge(age):setAge("")
+  }
+
+
+
+
+
+
+
   return (
     <div className={`${styles.form_container} p-4 mt-4`} >
       <h1>Form</h1>
@@ -136,8 +155,10 @@ function Form({renderTable}) {
           <label class="form-label">DOB</label>
           <input type="date" class="form-control"
             value={dob}
-            onChange={(e) => { setDob(e.target.value) }}
-            required />
+            onChange={(e) => {findAge(e.target.value); setDob(e.target.value) }}
+            required 
+
+            />
 
           {/* {dobError && <span className={`${styles.error_message}`} >{dobError}</span>} */}
 
