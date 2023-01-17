@@ -19,8 +19,9 @@ function Table({ users, renderTable }) {
 
     return (
 
-        <>
-        <hr />
+
+        <div className='col-12 mb-5'>
+            <hr />
             <h1 style={{ textAlign: 'center' }}>Users Table </h1>
             <hr />
             <div style={{ overflowX: "auto", backgroundColor: "#ebede8" }}>
@@ -61,7 +62,8 @@ function Table({ users, renderTable }) {
 
 
             </div>
-        </>
+        </div>
+
     )
 }
 

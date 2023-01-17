@@ -17,7 +17,7 @@ function Form({ renderTable }) {
   const [emailError, setEmailError] = useState('');
   const [mobileError, setMobileError] = useState('');
   const [ageError, setAgeError] = useState('');
-  // const [dobError, setDobError] = useState('');
+
 
 
   let handleSubmit = async (e) => {
@@ -25,7 +25,6 @@ function Form({ renderTable }) {
     let validationErr = false;
 
     // validations
-
     if (!/^[A-Za-z]+$/.test(firstName)) {
       validationErr = true;
       setFirstNameError("Only letters allowed")
@@ -58,7 +57,6 @@ function Form({ renderTable }) {
         email: email,
         dob: dob
       }
-
       try {
         let resp = await axios.post("http://localhost:7000/user/add-user", formData);
         if (resp.status === 201) {
@@ -72,11 +70,7 @@ function Form({ renderTable }) {
         console.log(err);
 
       }
-
-
     }
-
-
   }
 
   //======= age & DOB functions
@@ -88,8 +82,8 @@ function Form({ renderTable }) {
     (age < 150 && age > 1) ? setAge(age) : setAge("")
   }
 
-  let findDOB = (age)=>{
-    if(age<150){
+  let findDOB = (age) => {
+    if (age < 150) {
       let now = new Date();
       let currentYear = now.getFullYear();
       let yearOfBirth = currentYear - age;
@@ -98,83 +92,78 @@ function Form({ renderTable }) {
     }
   }
 
-
-
-
   return (
-    <div className={`${styles.form_container} p-4 mt-4`} >
-      <h1>Form</h1>
-      <form className='row' onSubmit={handleSubmit}>
 
-        <div className="col-12 col-md-6 mb-2">
-          <label for="validationCustom01" class="form-label">First name</label>
-          <input type="text" class="form-control"
-            value={firstName}
-            onChange={(e) => { setFirstName(e.target.value); setFirstNameError('') }}
-            required />
+    <div className='col-12 col-md-6 mb-4'>
+      <div className={`${styles.form_container} p-4 mt-4`} >
+        <h1>Form</h1>
+        <form className='row' onSubmit={handleSubmit}>
 
-          {firstNameError && <span className={`${styles.error_message}`} >{firstNameError}</span>}
+          <div className="col-12 col-md-6 mb-2">
+            <label for="validationCustom01" class="form-label">First name</label>
+            <input type="text" class="form-control"
+              value={firstName}
+              onChange={(e) => { setFirstName(e.target.value); setFirstNameError('') }}
+              required />
 
-        </div>
+            {firstNameError && <span className={`${styles.error_message}`} >{firstNameError}</span>}
 
-        <div className="col-12 col-md-6 ">
-          <label for="validationCustom02" class="form-label">Last name</label>
-          <input type="text" class="form-control"
-            value={lastName}
-            onChange={(e) => { setLastName(e.target.value); setLastNameError('') }}
-            required />
+          </div>
 
-          {lastNameError && <span className={`${styles.error_message}`} >{lastNameError}</span>}
-        </div>
+          <div className="col-12 col-md-6 ">
+            <label for="validationCustom02" class="form-label">Last name</label>
+            <input type="text" class="form-control"
+              value={lastName}
+              onChange={(e) => { setLastName(e.target.value); setLastNameError('') }}
+              required />
 
-        <div className="mb-2">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control"
-            value={email}
-            onChange={(e) => { setEmail(e.target.value); setEmailError('') }}
-            aria-describedby="emailHelp" />
+            {lastNameError && <span className={`${styles.error_message}`} >{lastNameError}</span>}
+          </div>
 
-          {emailError && <span className={`${styles.error_message}`} >{emailError}</span>}
-        </div>
+          <div className="mb-2">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control"
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); setEmailError('') }}
+              aria-describedby="emailHelp" />
 
-        <div class="col-md-4">
-          <label class="form-label">Mobile</label>
-          <input type="number" class="form-control"
-            value={mobile}
-            onChange={(e) => { setMobile(e.target.value); setMobileError('') }}
-            required />
-          {mobileError && <span className={`${styles.error_message}`} >{mobileError}</span>}
-        </div>
+            {emailError && <span className={`${styles.error_message}`} >{emailError}</span>}
+          </div>
 
-        <div class="col-6 col-md-4">
-          <label class="form-label">Age</label>
-          <input type="number" class="form-control"
-            value={age}
-            onChange={(e) => { findDOB(e.target.value);setAge(e.target.value); setAgeError('') }}
-            required />
-          {ageError && <span className={`${styles.error_message}`} >{ageError}</span>}
-        </div>
+          <div class="col-md-4">
+            <label class="form-label">Mobile</label>
+            <input type="number" class="form-control"
+              value={mobile}
+              onChange={(e) => { setMobile(e.target.value); setMobileError('') }}
+              required />
+            {mobileError && <span className={`${styles.error_message}`} >{mobileError}</span>}
+          </div>
 
-        <div class="col-6 col-md-4 mb-4">
-          <label class="form-label">DOB</label>
-          <input type="date" class="form-control"
-            value={dob}
-            onChange={(e) => { findAge(e.target.value); setDob(e.target.value) }}
-            required
+          <div class="col-6 col-md-4">
+            <label class="form-label">Age</label>
+            <input type="number" class="form-control"
+              value={age}
+              onChange={(e) => { findDOB(e.target.value); setAge(e.target.value); setAgeError('') }}
+              required />
+            {ageError && <span className={`${styles.error_message}`} >{ageError}</span>}
+          </div>
 
-          />
+          <div class="col-6 col-md-4 mb-4">
+            <label class="form-label">DOB</label>
+            <input type="date" class="form-control"
+              value={dob}
+              onChange={(e) => { findAge(e.target.value); setDob(e.target.value) }}
+              required
+            />
+          </div>
 
-          {/* {dobError && <span className={`${styles.error_message}`} >{dobError}</span>} */}
-
-        </div>
-
-
-        <div>
-          <button className='btn btn-primary col-12'> Submit </button>
-        </div>
+          <div>
+            <button className='btn btn-primary col-12'> Submit </button>
+          </div>
 
 
-      </form>
+        </form>
+      </div>
     </div>
   )
 }

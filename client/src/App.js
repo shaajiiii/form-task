@@ -12,7 +12,6 @@ function App() {
     getAllUsers();
   }, []);
 
-
   let getAllUsers = async () => {
     try {
       let resp = await axios.get("http://localhost:7000/user/get-all-users")
@@ -28,28 +27,13 @@ function App() {
 
   return (
     <div className="App">
-
       <div className='container'>
         <div className='row d-flex justify-content-center'>
-
-          <div className='col-12 col-md-6 mb-4'>
             <Form renderTable={getAllUsers} />
-          </div>
-
-        
-          <div className='col-12 mb-5'>
-
-            <Table users={users} renderTable={getAllUsers} />
-          </div>
-      
-          <div className='col-12 mt-3 mb-5'>
+            <Table users={users} renderTable={getAllUsers} /> 
             <SimpleMap />
-          </div>
-
         </div>
-
       </div>
-
     </div>
   );
 }
