@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Form.module.css';
 import axios from 'axios';
-import moment from 'moment';
+
 
 function Form({ renderTable }) {
 
@@ -61,7 +61,7 @@ function Form({ renderTable }) {
 
       try {
         let resp = await axios.post("http://localhost:7000/user/add-user", formData);
-        if (resp.status == 201) {
+        if (resp.status === 201) {
           setFirstName(''); setLastName(''); setMobile(''); setAge(''); setEmail(''); setDob('');
           renderTable();
         } else {
@@ -106,7 +106,7 @@ function Form({ renderTable }) {
       <h1>Form</h1>
       <form className='row' onSubmit={handleSubmit}>
 
-        <div class="col-12 col-md-6 mb-2">
+        <div className="col-12 col-md-6 mb-2">
           <label for="validationCustom01" class="form-label">First name</label>
           <input type="text" class="form-control"
             value={firstName}
@@ -117,7 +117,7 @@ function Form({ renderTable }) {
 
         </div>
 
-        <div class="col-12 col-md-6 ">
+        <div className="col-12 col-md-6 ">
           <label for="validationCustom02" class="form-label">Last name</label>
           <input type="text" class="form-control"
             value={lastName}
@@ -127,7 +127,7 @@ function Form({ renderTable }) {
           {lastNameError && <span className={`${styles.error_message}`} >{lastNameError}</span>}
         </div>
 
-        <div class="mb-2">
+        <div className="mb-2">
           <label for="exampleInputEmail1" class="form-label">Email address</label>
           <input type="email" class="form-control"
             value={email}

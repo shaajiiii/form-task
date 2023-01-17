@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Form from './components/Form/Form';
 import Table from './components/Table/Table';
 import axios from 'axios';
+import SimpleMap from './components/Map/Map';
 function App() {
 
   const [users, setUsers] = useState([]);
@@ -15,7 +16,7 @@ function App() {
   let getAllUsers = async () => {
     try {
       let resp = await axios.get("http://localhost:7000/user/get-all-users")
-      if (resp.status == 200) {
+      if (resp.status === 200) {
         setUsers(resp.data) // array of users
       }
     } catch (error) {
@@ -35,8 +36,14 @@ function App() {
             <Form renderTable={getAllUsers} />
           </div>
 
-          <div className='col-12 '>
+        
+          <div className='col-12 mb-5'>
+
             <Table users={users} renderTable={getAllUsers} />
+          </div>
+      
+          <div className='col-12 mt-3 mb-5'>
+            <SimpleMap />
           </div>
 
         </div>
