@@ -1,11 +1,30 @@
 import React from 'react';
 import axios from 'axios';
 import styles from './Table.module.css';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 function Table({ users, renderTable }) {
 
-    let deleteUser = (userId) => {
+    const MySwal = withReactContent(Swal);
 
+    const deleteUserPrompt = (UserId , userFirstName) => {
+        MySwal.fire({
+            title: `Delete ${userFirstName}?`,
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#398ab9',
+            confirmButtonText: 'Delete!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteUser(UserId)
+            }
+        })
+    }
+
+    let deleteUser = (userId) => {
         axios.delete(`http://localhost:7000/user/delete-user/${userId}`)
             .then(() => {
                 renderTable();
@@ -14,7 +33,6 @@ function Table({ users, renderTable }) {
                 console.log("error in delete user");
                 console.log(err);
             })
-
     }
 
     return (
@@ -50,7 +68,7 @@ function Table({ users, renderTable }) {
                                     <td>{user.dob}</td>
                                     <td >
                                         <img className={`${styles.activeBtn}`} style={{ marginRight: "10px" }} src="icon-pencil.png" height={"25px"} alt="" />
-                                        <img className={`${styles.activeBtn}`} onClick={() => { deleteUser(user._id) }} src="icon-delete.png" height={"25px"} alt="" title={`Click to delete ${user.firstName}`} />
+                                        <img className={`${styles.activeBtn}`} onClick={() => { deleteUserPrompt(user._id,user.firstName) }} src="icon-delete.png" height={"25px"} alt="" title={`Click to delete ${user.firstName}`} />
                                     </td>
                                 </tr>
                             )
