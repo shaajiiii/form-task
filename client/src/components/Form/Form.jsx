@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from './Form.module.css';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 
 function Form({ renderTable }) {
@@ -18,7 +20,21 @@ function Form({ renderTable }) {
   const [mobileError, setMobileError] = useState('');
   const [ageError, setAgeError] = useState('');
 
+//
+  const MySwal = withReactContent(Swal);
+  const Toast = MySwal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
 
+  ///
 
   let handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,6 +76,14 @@ function Form({ renderTable }) {
       try {
         let resp = await axios.post("http://localhost:7000/user/add-user", formData);
         if (resp.status === 201) {
+
+          //test
+         
+          Toast.fire({
+            icon: 'success',
+            title: 'User added successfully'
+          })
+
           setFirstName(''); setLastName(''); setMobile(''); setAge(''); setEmail(''); setDob('');
           renderTable();
         } else {

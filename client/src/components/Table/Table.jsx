@@ -27,6 +27,10 @@ function Table({ users, renderTable }) {
     let deleteUser = (userId) => {
         axios.delete(`http://localhost:7000/user/delete-user/${userId}`)
             .then(() => {
+                MySwal.fire({
+                    icon: 'success',
+                    title: 'Deleted!',
+                  })
                 renderTable();
             })
             .catch((err) => {
